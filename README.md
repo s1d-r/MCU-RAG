@@ -1,6 +1,6 @@
 # MCU-RAG — ask your embedded datasheet anything
 
-*Stop scrolling datasheets. Start shipping firmware.*
+*Your embedded datasheet assistant — local, pixel-based, and grounded.*
 
 A local, pixel-based RAG for MCU datasheets and reference manuals
 

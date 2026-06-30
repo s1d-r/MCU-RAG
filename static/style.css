@@ -78,7 +78,7 @@ body {
   line-height: 1.02; letter-spacing: -1px; margin: 2vh 0 18px;
 }
 .title .word { display: inline-block; opacity: 0; transform: translateY(18px); animation: rise 0.6s forwards; margin: 0 6px; }
-.title .grad { background: var(--grad); background-size: 220% auto; -webkit-background-clip: text; background-clip: text; color: transparent; animation: shimmer 5s linear infinite; }
+.title .grad { background: var(--grad); background-size: 220% auto; -webkit-background-clip: text; background-clip: text; color: transparent; opacity: 0; transform: translateY(18px); animation: rise 0.6s forwards, shimmer 5s linear infinite; }
 @keyframes shimmer { to { background-position: 220% center; } }
 .caret { color: var(--accent2); -webkit-text-fill-color: var(--accent2); animation: blinkcaret 1s steps(1) infinite; font-weight: 400; }
 @keyframes blinkcaret { 50% { opacity: 0; } }
