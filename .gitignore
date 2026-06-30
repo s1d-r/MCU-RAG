@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# MCU-RAG runtime artifacts (rebuilt locally, large)
+data/
+pixel_index/
+colab_index/
+*_index/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

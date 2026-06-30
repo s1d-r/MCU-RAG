@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MCU·RAG — ask your datasheet anything</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <!-- animated background -->
+  <div class="bg">
+    <div class="blob b1"></div>
+    <div class="blob b2"></div>
+    <div class="blob b3"></div>
+    <div class="grid"></div>
+    <div class="bits" id="bits"></div>
+  </div>
+
+  <!-- ============ LANDING ============ -->
+  <section id="landing" class="view active">
+    <header class="brand">
+      <span class="logo">▘▝<br>▖▗</span>
+      <span class="brandname">MCU·RAG</span>
+      <span class="badge">local · ollama · qwen3-vl</span>
+    </header>
+
+    <div class="hero">
+      <h1 class="title">
+        <span class="word">Stop</span>
+        <span class="word">scrolling</span>
+        <span class="word grad">datasheets.</span>
+        <br />
+        <span class="word">Start</span>
+        <span class="word">shipping</span>
+        <span class="word grad">firmware.<span class="caret">_</span></span>
+      </h1>
+      <p class="subtitle">
+        Drop a 300-page MCU manual. Ask it like a teammate. Every page is <em>read</em> by a
+        vision model — pinouts, register maps and jumper tables survive intact. 100% on your machine.
+      </p>
+
+      <div class="card drop" id="dropzone">
+        <input type="file" id="fileInput" accept="application/pdf" hidden />
+        <div class="drop-inner" id="dropInner">
+          <div class="drop-icon">⬡</div>
+          <div class="drop-title">Drop a datasheet PDF here</div>
+          <div class="drop-sub">or <button class="link" id="browseBtn">browse files</button></div>
+          <div class="drop-opts">
+            <label>Index mode
+              <select id="modeSel">
+                <option value="text">text — fast (recommended)</option>
+                <option value="vlm">vlm — describe every page (slow)</option>
+              </select>
+            </label>
+            <label>Max pages
+              <input type="number" id="maxPages" min="1" placeholder="all" />
+            </label>
+          </div>
+        </div>
+
+        <div class="progress-wrap" id="progressWrap" hidden>
+          <div class="progress-head"><span id="progressLabel">Rendering…</span><span id="progressPct">0%</span></div>
+          <div class="progress"><div class="progress-bar" id="progressBar"></div></div>
+          <div class="progress-sub" id="progressSub"></div>
+        </div>
+      </div>
+
+      <div class="continue" id="continueRow" hidden>
+        <span>Loaded: <strong id="loadedName"></strong></span>
+        <button class="btn ghost" id="continueBtn">Continue chatting →</button>
+      </div>
+
+      <div class="feats">
+        <div class="feat"><b>Pixel reading</b><span>Answers come from the page image, not a lossy text parse.</span></div>
+        <div class="feat"><b>Streaming chat</b><span>Tokens stream live — hit Stop anytime to free the GPU.</span></div>
+        <div class="feat"><b>Grounded cites</b><span>Every answer names the exact pages it read.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CHAT ============ -->
+  <section id="chat" class="view">
+    <header class="chatbar">
+      <div class="chatbar-left">
+        <span class="logo small">▘▝<br>▖▗</span>
+        <div class="doc">
+          <div class="doc-name" id="docName">document.pdf</div>
+          <div class="doc-meta" id="docMeta"></div>
+        </div>
+      </div>
+      <button class="btn ghost" id="newPdfBtn">＋ New PDF</button>
+    </header>
+
+    <div class="messages" id="messages"></div>
+
+    <div class="composer">
+      <textarea id="qInput" rows="1" placeholder="Ask about a pin, table, jumper, register…"></textarea>
+      <button class="btn send" id="sendBtn" title="Send">➤</button>
+      <button class="btn stop" id="stopBtn" title="Stop" hidden>■ Stop</button>
+    </div>
+    <div class="hint">Enter to send · Shift+Enter for newline · answers take a moment on an 8 GB GPU</div>
+  </section>
+
+  <!-- lightbox for page images -->
+  <div class="lightbox" id="lightbox" hidden>
+    <img id="lightboxImg" alt="datasheet page" />
+    <button class="lightbox-close" id="lightboxClose">✕</button>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
